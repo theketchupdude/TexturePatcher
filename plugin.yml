@@ -1,3 +1,4 @@
 name: TexturePatcher
 version: 1.0.0-Beta
 author: theketchupdude
+main: io.github.theketchupdude.TexturePatcher

@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.dropbox.core.DbxException;
+
 public class TexturePatcher extends JavaPlugin {	
 	
 	static Logger log = Logger.getLogger("Minecraft");
@@ -55,6 +57,12 @@ public class TexturePatcher extends JavaPlugin {
 	}
 	
 	@EventHandler
-	public void onPlayerJoinWorld(PlayerJoinEvent e){}
+	public void onPlayerJoinWorld(PlayerJoinEvent e){
+		try {
+			e.getPlayer().setResourcePack(link.client.files().getTemporaryLink("/pack.zip").getLink());
+		} catch (DbxException e1) {
+			log.severe(e1.getLocalizedMessage());
+		}
+	}
 }
 	

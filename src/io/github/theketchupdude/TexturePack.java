@@ -1,5 +1,12 @@
 package io.github.theketchupdude;
 
-public class TexturePack {
+import java.io.File;
 
+class TexturePack {
+	
+	private File location;
+	
+	TexturePack(File packloc){
+		location = packloc;
+	}
 }

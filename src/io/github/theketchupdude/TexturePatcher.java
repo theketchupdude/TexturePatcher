@@ -16,10 +16,7 @@ import com.dropbox.core.DbxException;
 public class TexturePatcher extends JavaPlugin {	
 	
 	static Logger log = Logger.getLogger("Minecraft");
-	
-	File data = new File(this.getDataFolder() + "/texturepatcher.dat");
-	FileOutputStream dataWriter;
-	FileInputStream dataReader;
+
 	File temp = new File(this.getDataFolder() + "/tmp/");
 	
 	DropboxLink link = new DropboxLink(this.getConfig().getString("DropboxApiKey"));
@@ -28,24 +25,6 @@ public class TexturePatcher extends JavaPlugin {
 	
 	public void onLoad(){
 		log.info("[TexturePatcher] Loaded.");
-		
-		//First load
-		if(!data.exists()){
-			try {
-				data.createNewFile();
-				this.saveDefaultConfig();
-			} catch (IOException e) {
-				log.severe(e.getLocalizedMessage());
-			}
-		}
-		
-		//Initialize data reading and writing
-		try {
-			dataWriter = new FileOutputStream(data);
-			dataReader = new FileInputStream(data);
-		} catch (FileNotFoundException e) {
-			log.severe(e.getLocalizedMessage());
-		}
 	}
 	
 	public void onEnable(){

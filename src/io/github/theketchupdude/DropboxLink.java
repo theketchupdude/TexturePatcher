@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.logging.Logger;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
@@ -30,16 +31,16 @@ class DropboxLink {
                 .withMode(WriteMode.ADD)
                 .withClientModified(new Date(localFile.lastModified()))
                 .uploadAndFinish(in);
-
-            System.out.println(metadata.toStringMultiline());
+            
+            Logger.getLogger("Minecraft").info("[TexturePatcher] Uploaded:" + metadata.toStringMultiline());
         } catch (UploadErrorException ex) {
-            System.err.println("Error uploading to Dropbox: " + ex.getMessage());
+        	Logger.getLogger("Minecraft").severe("[TexturePatcher] Error uploading to Dropbox: " + ex.getMessage());
             System.exit(1);
         } catch (DbxException ex) {
-            System.err.println("Error uploading to Dropbox: " + ex.getMessage());
+        	Logger.getLogger("Minecraft").severe("[TexturePatcher] Error uploading to Dropbox: " + ex.getMessage());
             System.exit(1);
         } catch (IOException ex) {
-            System.err.println("Error reading from file \"" + localFile + "\": " + ex.getMessage());
+        	Logger.getLogger("Minecraft").severe("[TexturePatcher] Error reading from file \"" + localFile + "\": " + ex.getMessage());
             System.exit(1);
         }
     }
